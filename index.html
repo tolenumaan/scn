@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Notebook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX for LaTeX Math Rendering (CSS Only) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcPF+H7XPSUAnJdqHxkO_iCgC3YF1pTReK7_LckOInJoc3Gk+5G8k+1JjNq/wDq/T" crossorigin="anonymous">
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #080a0f; /* Very dark blue/black base */
+        color: #d1d5db; /* Light grey for text (Tailwind gray-300) */
+        overflow-x: hidden;
+      }
+
+      /* Glassmorphism base for elements */
+      .glassmorphic {
+        background: rgba(25, 30, 45, 0.65); /* Darker, slightly blueish space-gray */
+        backdrop-filter: blur(12px) saturate(150%);
+        -webkit-backdrop-filter: blur(12px) saturate(150%);
+        border: 1px solid rgba(100, 116, 139, 0.2); /* Subtle cool gray border */
+        border-radius: 12px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+      }
+      
+      .robotic-title {
+        font-family: 'Inter', sans-serif; /* Using Inter, bold for emphasis */
+        font-weight: 700; /* Bold */
+        color: #00f0f0; /* Bright Cyan accent */
+        text-shadow: 0 0 4px rgba(0, 240, 240, 0.5), 0 0 8px rgba(0, 240, 240, 0.3);
+        letter-spacing: 0.025em; /* Slight letter spacing for tech feel */
+      }
+
+      /* Custom scrollbar for a more thematic feel */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(10, 15, 25, 0.3); /* Darker track */
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 220, 220, 0.5); /* Muted Cyan scrollbar thumb */
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 240, 240, 0.7);
+      }
+
+      /* Tailwind prose adjustments for dark theme */
+      .prose {
+        color: #d1d5db; /* Tailwind gray-300 */
+        max-width: none;
+      }
+      .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+        color: #00f0f0; /* Bright Cyan for headings */
+        font-family: 'Inter', sans-serif; /* Ensure Inter, handled by .robotic-title if applied */
+        font-weight: 700; /* Bold for headings */
+      }
+      .prose p, .prose li, .prose blockquote {
+        color: #adb5bd; /* Lighter grey for paragraph text (Tailwind gray-400) */
+      }
+      .prose a {
+        color: #5eead4; /* Lighter, slightly desaturated cyan for links (Tailwind teal-300) */
+        transition: color 0.3s ease;
+      }
+      .prose a:hover {
+        color: #99f6e4; /* Tailwind teal-200 */
+      }
+      .prose strong {
+        color: #f8f9fa; /* Tailwind gray-100 */
+      }
+      .prose code {
+        background-color: rgba(0, 240, 240, 0.08); /* Very subtle cyan glow */
+        color: #5eead4; /* Light teal for code text */
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        font-family: 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", monospace;
+        font-size: 0.9em;
+      }
+      .prose pre {
+        background-color: rgba(10, 15, 25, 0.7); /* Darker background for pre */
+        border: 1px solid rgba(0, 240, 240, 0.15);
+        border-radius: 8px;
+        color: #adb5bd; /* Default text color inside pre */
+      }
+      .prose pre code { /* Code inside pre should not have its own background */
+        background-color: transparent;
+        color: inherit; /* Inherit pre's text color or specific syntax highlighting color */
+        padding: 0;
+      }
+      .prose ul > li::before {
+        background-color: #00f0f0; /* Cyan for list bullets */
+      }
+      .prose table {
+          border-collapse: separate;
+          border-spacing: 0;
+          border: 1px solid rgba(0, 240, 240, 0.2); /* Cyan border */
+          border-radius: 8px;
+          width: 100%;
+      }
+      .prose th {
+          background-color: rgba(0, 240, 240, 0.1); /* Subtle cyan background */
+          color: #00f0f0; /* Cyan text for headers */
+          border-bottom: 1px solid rgba(0, 240, 240, 0.3);
+          padding: 0.75rem;
+          text-align: left;
+          font-weight: 600; /* Semi-bold for table headers */
+      }
+      .prose td {
+          border: 1px solid rgba(0, 240, 240, 0.1);
+          padding: 0.75rem;
+          color: #adb5bd; /* Lighter gray for table cell text */
+      }
+      .prose tr:nth-child(even) {
+          background-color: rgba(255, 255, 255, 0.015); /* Very subtle alternating row background */
+      }
+      .prose caption {
+          color: #00f0f0;
+          font-family: 'Inter', sans-serif;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          font-size: 1.1em;
+          caption-side: top; /* Standard caption position */
+      }
+
+      /* KaTeX styling for dark theme */
+      .katex { 
+        font-size: 1.1em; 
+        color: #d1d5db; /* Light text color for formulas */
+      }
+      
+      .loading-spinner {
+        border-color: rgba(0, 220, 220, 0.2); /* Muted cyan transparent */
+        border-top-color: #00f0f0; /* Bright Cyan for the spinner head */
+      }
+      /* Mermaid diagram styling (primary styling via JS init, this is fallback/override) */
+      .mermaid svg {
+        font-family: 'Inter', sans-serif !important;
+      }
+      .mermaid .label {
+        color: #d1d5db !important;
+      }
+       .mermaid .actor {
+        fill: #1a1f2c !important; /* Darker fill for actors */
+        stroke: #00f0f0 !important; /* Cyan stroke */
+      }
+      .mermaid .messageText, .mermaid .labelText {
+          fill: #d1d5db !important;
+      }
+      .mermaid .noteText {
+          fill: #111318 !important; /* Ensure text inside notes is visible on dark note bg */
+      }
+
+      /* Styles for AI Tutor Chat Interface (global classes, can be refined in component) */
+      .ai-tutor-chat-input input:focus {
+        /* Tailwind focus classes used directly, ensure they align */
+        box-shadow: 0 0 0 2px #080a0f, 0 0 0 4px #00f0f0; /* Example focus ring */
+      }
+      .ai-tutor-chat-input button:disabled {
+        /* Tailwind disabled classes used directly */
+      }
+
+      /* Added for Flashcard 3D effect */
+      .perspective {
+        perspective: 1000px;
+      }
+      /* Tailwind's `transform-preserve-3d`, `rotate-y-180`, `backface-hidden` should handle the rest */
+
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.2",
+    "@google/genai": "https://esm.sh/@google/genai",
+    "katex": "https://esm.sh/katex@0.16.10",
+    "chart.js": "https://esm.sh/chart.js@4.4.1",
+    "chart.js/": "https://esm.sh/chart.js@4.4.1/", 
+    "mermaid": "https://esm.sh/mermaid@10.9.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

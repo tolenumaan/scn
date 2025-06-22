@@ -1,0 +1,6 @@
+{
+  "name": "Cybersecurity Interactive Notebook",
+  "description": "An interactive web application displaying cybersecurity learning materials, organized into chapters and sections, allowing users to navigate and read educational content.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
